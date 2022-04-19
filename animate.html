@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <!--1st step Create canvas-->
+    <canvas id="MyCanvas" height="800" width="600"></canvas>
+
+    <!--2nd give it some style-->
+    <style>
+      #MyCanvas {
+        background-color: gray;
+      }
+    </style>
+
+    <!--3rd make it do something-->
+    <script>
+      //Make variables for canvas and context
+      var canvas = document.getElementById("MyCanvas");
+      var context = canvas.getContext("2d");
+      //Create a variable to track frames
+      var frameCount = 0;
+      var w = 300;
+      var h = 100;
+      var x;
+      var y;
+      //This is called recursion
+      //-A function that calls itself
+      function draw() {
+        //Create random number
+        var rnd = Math.floor(Math.random() * 5);
+
+        frameCount++;
+        if (frameCount < 20) {
+          window.requestAnimationFrame(draw);
+          return;
+        }
+
+        frameCount = 0;
+        //If rnd is 0 make it blue
+        //If its 1 make red
+        if (rnd == 0) {
+          context.fillStyle = "blue";
+        } else if (rnd == 1) {
+          context.fillStyle = "green";
+        } else {
+          context.fillStyle = "red";
+        }
+        //Use context to make shape
+        context.fillRect(0, 0, 300, 100);
+
+        window.requestAnimationFrame(draw);
+      }
+
+      draw();
+    </script>
+  </body>
+</html>
